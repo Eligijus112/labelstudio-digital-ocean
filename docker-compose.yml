@@ -1,0 +1,29 @@
+version: '3' 
+
+services:
+
+  # The labelstudio container
+  labeling_app:
+    depends_on: 
+      - db    
+    stdin_open: true
+    tty: true
+    image: heartexlabs/label-studio:v1.4.1
+    ports:
+      - 8123:8080
+    env_file:
+      - label.env
+    volumes:
+      - ./label_data:/label-studio/data
+
+  # PSQL database 
+  db:
+    image: postgres:14.2
+    hostname: db
+    restart: always
+    env_file:
+      - psql.env
+    ports:
+      - 2222:5432
+    volumes:
+      - ./psql_data:/var/lib/postgresql/data

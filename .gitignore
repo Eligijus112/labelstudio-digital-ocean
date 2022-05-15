@@ -1,0 +1,7 @@
+# App output data
+label_data/
+psql_data/
+
+# .env variables
+label.env
+psql.env 
